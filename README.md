@@ -1,6 +1,21 @@
 # Book Management App
 
-A full-stack Book Management application with a Node.js + Express + MongoDB backend and a Vite + React frontend.
+A full-stack Book Management application with a Node.js + Express + MongoDB backend and a Vite + React frontend. This project includes a complete suite of unit, integration, and API tests.
+
+---
+
+## Tech Stack
+
+### Backend
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB with Mongoose ODM
+- **Testing:** Jest, Supertest
+
+### Frontend
+- **Library:** React
+- **Build Tool:** Vite
+- **Styling:** CSS
 
 ---
 
@@ -112,90 +127,67 @@ All endpoints are prefixed with `/api/books`.
 ## How to Run the Project
 
 ### Backend (API Server)
-1. Go to the backend directory:
-   ```sh
-   cd backend
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Create a `.env` file:
-   ```env
-   PORT=3545
-   MONGO_URI=mongodb://127.0.0.1:27017/bookdb
-   ```
-4. Start MongoDB (locally or use MongoDB Atlas).
-5. Start the backend server:
-   ```sh
-   npm run dev
-   # or
-   node server.js
-   ```
+1.  Navigate to the `backend` directory:
+    ```sh
+    cd backend
+    ```
+2.  Install dependencies:
+    ```sh
+    npm install
+    ```
+3.  Create a `.env` file with your MongoDB connection string:
+    ```env
+    PORT=3545
+    MONGO_URI=mongodb://127.0.0.1:27017/bookdb
+    ```
+4.  Ensure MongoDB is running.
+5.  Start the server:
+    ```sh
+    npm run dev
+    ```
 
 ### Frontend (Web App)
-1. Go to the frontend directory:
-   ```sh
-   cd frontend
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the frontend:
-   ```sh
-   npm run dev
-   ```
-4. Open the provided local URL (e.g., http://localhost:5173) in your browser.
+1.  Navigate to the `frontend` directory:
+    ```sh
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```sh
+    npm install
+    ```
+3.  Start the frontend app:
+    ```sh
+    npm run dev
+    ```
+4.  Open the provided URL (e.g., `http://localhost:5173`) in your browser.
 
 ---
 
-## How to Interact with the API
-- Use the frontend web app to create, read, update, and delete books.
-- Alternatively, use Postman or curl to test the API endpoints directly.
+## Testing
 
-### Example curl Commands
+This project uses **Jest** for unit and integration testing and **Supertest** for API endpoint testing.
 
-**Add a Book:**
-```sh
-curl -X POST http://localhost:3545/api/books -H "Content-Type: application/json" -d '{"title":"The Hobbit","author":"J.R.R. Tolkien","genre":"Fantasy","publishedYear":1937}'
-```
+### How to Run Tests
+1.  Navigate to the `backend` directory.
+2.  Run all tests:
+    ```sh
+    npm test
+    ```
+3.  To generate a coverage report:
+    ```sh
+    npm run test:coverage
+    ```
 
-**Get All Books:**
-```sh
-curl http://localhost:3545/api/books
-```
+### Test Coverage
+Here is the test coverage report for the API:
+![Test Coverage](./API-tested.png)
 
-**Update a Book:**
-```sh
-curl -X PUT http://localhost:3545/api/books/<BOOK_ID> -H "Content-Type: application/json" -d '{"title":"Updated Title","author":"Updated Author","genre":"Updated Genre","publishedYear":2024}'
-```
+### Integration Test Results
+Screenshot of the successful integration and API tests:
+![Integration Test Results](./Integration-tested.png)
 
-**Delete a Book:**
-```sh
-curl -X DELETE http://localhost:3545/api/books/<BOOK_ID>
-```
-
----
-
-## Project Structure
-
-```
-keploy-API/
-  backend/
-    models/
-    routes/
-    controllers/
-    config/
-    server.js
-    package.json
-    .env
-  frontend/
-    src/
-    public/
-    package.json
-    ...
-  README.md
-```
+### Unit Test Results
+Screenshot of the successful unit tests with mocked dependencies:
+![Unit Test Results](./unit-tested.png)
 
 ---
