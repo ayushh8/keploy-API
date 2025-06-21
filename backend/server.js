@@ -24,7 +24,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Book Management API!');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-}); 
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app; 
