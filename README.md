@@ -1,4 +1,4 @@
-# Book Management App
+# Book Management App(Keploy Session-2 Task on APIs) 
 
 A full-stack Book Management application with a Node.js + Express + MongoDB backend and a Vite + React frontend. This project includes a complete suite of unit, integration, and API tests.
 
