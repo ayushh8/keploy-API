@@ -1,0 +1,58 @@
+name: CI/CD Pipeline with Keploy API Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Start backend server
+        run: |
+          cd backend
+          nohup npm start &
+          sleep 10
+
+      - name: Download Keploy CLI
+        run: |
+          curl -sSfL https://github.com/keploy/keploy/releases/latest/download/keploy-linux-amd64 -o keploy
+          chmod +x keploy
+          sudo mv keploy /usr/local/bin/
+
+      - name: Run Keploy tests
+        run: |
+          cd backend
+          keploy test --cport 3545 --delay 10
+
+      - name: Archive Keploy test reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: keploy-reports
+          path: backend/keploy/reports/ 
